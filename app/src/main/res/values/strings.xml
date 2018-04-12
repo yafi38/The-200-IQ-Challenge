@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">The 200 IQ Challenge</string>
+    <string name="title_activity_game">GameActivity</string>
 </resources>

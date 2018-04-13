@@ -1,0 +1,4 @@
+1. Where is left?;Down;Above;Right;Nowhere;2
+2. Which one hurts the most?;1;2;3;4;1
+3. What goes up but does not come down?;Mira;Lira;Kira;Nira;3
+4. What is 1+5?;Phone;Five;Six;Seven;1

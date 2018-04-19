@@ -15,6 +15,7 @@ class EndActivity : AppCompatActivity() {
 
     fun backToMenu(view: View) {
         val menuIntent = Intent(this, MenuActivity::class.java)
+        finish()
         startActivity(menuIntent)
     }
 }

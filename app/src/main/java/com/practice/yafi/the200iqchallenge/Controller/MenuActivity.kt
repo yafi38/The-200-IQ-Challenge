@@ -19,7 +19,4 @@ class MenuActivity : AppCompatActivity() {
         startActivity(gameIntent)
     }
 
-    fun exitButtonClicked(view: View) {
-        finish()
-    }
 }

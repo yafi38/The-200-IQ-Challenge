@@ -28,6 +28,7 @@ class GameActivity : AppCompatActivity() {
     private fun loadQuestion() {
         if(currentQuestionNo == questions.size) {
             val endIntent = Intent(this, EndActivity::class.java)
+            finish()
             startActivity(endIntent)
         }
         else {
@@ -76,7 +77,7 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    fun wrongAnswer() {
+    private fun wrongAnswer() {
         Toast.makeText(this, "Wrong Answer", Toast.LENGTH_SHORT).show()
     }
 }

@@ -42,6 +42,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     fun optionButton1Clicked(view: View) {
+        Thread.sleep(250)
         if(questions[currentQuestionNo].answer == 1) {
             currentQuestionNo++
             loadQuestion()
@@ -51,6 +52,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     fun optionButton2Clicked(view: View) {
+        Thread.sleep(250)
         if(questions[currentQuestionNo].answer == 2) {
             currentQuestionNo++
             loadQuestion()
@@ -60,6 +62,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     fun optionButton3Clicked(view: View) {
+        Thread.sleep(250)
         if(questions[currentQuestionNo].answer == 3) {
             currentQuestionNo++
             loadQuestion()
@@ -69,6 +72,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     fun optionButton4Clicked(view: View) {
+        Thread.sleep(250)
         if(questions[currentQuestionNo].answer == 4) {
             currentQuestionNo++
             loadQuestion()

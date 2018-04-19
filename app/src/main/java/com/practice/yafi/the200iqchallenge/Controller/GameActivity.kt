@@ -1,5 +1,6 @@
 package com.practice.yafi.the200iqchallenge.Controller
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -10,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_game.*
 import java.util.*
 
 class GameActivity : AppCompatActivity() {
-    var currentQuestionNo = 0;
+    var currentQuestionNo = 0
     private val questions = Vector<Question>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +19,6 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
 
         applicationContext.assets.open("QuestionFile.txt").reader().forEachLine {
-            println(it)
             val strings = it.split(";")
             questions.add(Question(strings[0], arrayOf(strings[1], strings[2], strings[3], strings[4]), strings[5].toInt()))
         }
@@ -26,12 +26,18 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun loadQuestion() {
-        val currentQuestion =  questions[currentQuestionNo]
-        questionText.text = currentQuestion.question
-        optionButton1.text = currentQuestion.options[0]
-        optionButton2.text = currentQuestion.options[1]
-        optionButton3.text = currentQuestion.options[2]
-        optionButton4.text = currentQuestion.options[3]
+        if(currentQuestionNo == questions.size) {
+            val endIntent = Intent(this, EndActivity::class.java)
+            startActivity(endIntent)
+        }
+        else {
+            val currentQuestion = questions[currentQuestionNo]
+            questionText.text = currentQuestion.question
+            optionButton1.text = currentQuestion.options[0]
+            optionButton2.text = currentQuestion.options[1]
+            optionButton3.text = currentQuestion.options[2]
+            optionButton4.text = currentQuestion.options[3]
+        }
     }
 
     fun optionButton1Clicked(view: View) {

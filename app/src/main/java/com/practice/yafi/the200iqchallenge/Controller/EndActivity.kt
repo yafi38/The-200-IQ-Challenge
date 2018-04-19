@@ -6,20 +6,15 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.practice.yafi.the200iqchallenge.R
 
-class MenuActivity : AppCompatActivity() {
+class EndActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_menu)
-
+        setContentView(R.layout.activity_end)
     }
 
-    fun playButtonClicked(view: View) {
-        val gameIntent = Intent(this, GameActivity::class.java)
-        startActivity(gameIntent)
-    }
-
-    fun exitButtonClicked(view: View) {
-        finish()
+    fun backToMenu(view: View) {
+        val menuIntent = Intent(this, MenuActivity::class.java)
+        startActivity(menuIntent)
     }
 }

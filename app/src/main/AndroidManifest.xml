@@ -26,7 +26,8 @@
         <activity
             android:name=".Controller.GameActivity"
             android:label="@string/title_activity_game"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Controller.EndActivity"></activity>
     </application>
 
 </manifest>

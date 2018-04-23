@@ -15,6 +15,7 @@ class MenuActivity : AppCompatActivity() {
     }
 
     fun playButtonClicked(view: View) {
+        Thread.sleep(100)
         val gameIntent = Intent(this, GameActivity::class.java)
         startActivity(gameIntent)
     }

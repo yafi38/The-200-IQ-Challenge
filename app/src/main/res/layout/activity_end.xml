@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimary"
     tools:context=".Controller.EndActivity">
 
     <TextView
@@ -47,7 +47,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/checked"
+        android:background="@drawable/button_checked"
         android:onClick="backToMenu"
         android:text="Back to Menu"
         app:layout_constraintBottom_toBottomOf="parent"

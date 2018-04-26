@@ -2,6 +2,8 @@ package com.practice.yafi.the200iqchallenge.Controller
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
@@ -26,12 +28,11 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun loadQuestion() {
-        if(currentQuestionNo == questions.size) {
+        if (currentQuestionNo == questions.size) {
             val endIntent = Intent(this, EndActivity::class.java)
             finish()
             startActivity(endIntent)
-        }
-        else {
+        } else {
             val currentQuestion = questions[currentQuestionNo]
             questionText.text = currentQuestion.question
             optionButton1.text = currentQuestion.options[0]
@@ -43,9 +44,8 @@ class GameActivity : AppCompatActivity() {
 
     fun optionButton1Clicked(view: View) {
         Thread.sleep(100)
-        if(questions[currentQuestionNo].answer == 1) {
-            currentQuestionNo++
-            loadQuestion()
+        if (questions[currentQuestionNo].answer == 1) {
+            rightAnswer()
         } else {
             wrongAnswer()
         }
@@ -53,9 +53,8 @@ class GameActivity : AppCompatActivity() {
 
     fun optionButton2Clicked(view: View) {
         Thread.sleep(100)
-        if(questions[currentQuestionNo].answer == 2) {
-            currentQuestionNo++
-            loadQuestion()
+        if (questions[currentQuestionNo].answer == 2) {
+            rightAnswer()
         } else {
             wrongAnswer()
         }
@@ -63,9 +62,8 @@ class GameActivity : AppCompatActivity() {
 
     fun optionButton3Clicked(view: View) {
         Thread.sleep(100)
-        if(questions[currentQuestionNo].answer == 3) {
-            currentQuestionNo++
-            loadQuestion()
+        if (questions[currentQuestionNo].answer == 3) {
+            rightAnswer()
         } else {
             wrongAnswer()
         }
@@ -73,15 +71,37 @@ class GameActivity : AppCompatActivity() {
 
     fun optionButton4Clicked(view: View) {
         Thread.sleep(100)
-        if(questions[currentQuestionNo].answer == 4) {
-            currentQuestionNo++
-            loadQuestion()
+        if (questions[currentQuestionNo].answer == 4) {
+            rightAnswer()
         } else {
             wrongAnswer()
         }
     }
 
+    private fun rightAnswer() {
+        showRightAnswerDialog()
+        currentQuestionNo++
+        loadQuestion()
+
+    }
+
     private fun wrongAnswer() {
         Toast.makeText(this, "Wrong Answer", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showRightAnswerDialog() {
+        val dialog = AlertDialog.Builder(this)
+        val dialogView = layoutInflater.inflate(R.layout.right_answer_dialog, null)
+        dialog.setView(dialogView)
+        val alert = dialog.create()
+        alert.show()
+
+        Handler().postDelayed({
+            if (alert.isShowing)
+                alert.dismiss()
+        }, 1000)
+
+
+        //while(alert.isShowing);
     }
 }

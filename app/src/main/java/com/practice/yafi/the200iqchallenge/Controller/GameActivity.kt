@@ -16,7 +16,6 @@ class GameActivity : AppCompatActivity() {
     var currentQuestionNo = 0
     private val questions = Vector<Question>()
 
-    val wrongSound = MediaPlayer.create(this, )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,11 +76,13 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun rightAnswer() {
+        val rightSound = MediaPlayer.create(this, R.raw.right_answer)
+        rightSound.start()
         currentQuestionNo++
         if (currentQuestionNo == questions.size) {
             val endIntent = Intent(this, EndActivity::class.java)
-            finish()
             startActivity(endIntent)
+            finish()
         } else {
             showRightAnswerDialog()
             loadQuestion()
@@ -90,7 +91,8 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun wrongAnswer() {
-
+        val wrongSound = MediaPlayer.create(this, R.raw.wrong_answer)
+        wrongSound.start()
         showWrongAnswerDialog()
     }
 
@@ -119,5 +121,10 @@ class GameActivity : AppCompatActivity() {
             if (alert.isShowing)
                 alert.dismiss()
         }, 1000)
+    }
+
+    override fun onBackPressed() {
+        val menuIntent = Intent(this, MenuActivity::class.java)
+        startActivity(menuIntent)
     }
 }

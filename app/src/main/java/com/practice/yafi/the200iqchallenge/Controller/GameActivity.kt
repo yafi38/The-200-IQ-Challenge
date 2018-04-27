@@ -1,6 +1,7 @@
 package com.practice.yafi.the200iqchallenge.Controller
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AlertDialog
@@ -14,6 +15,8 @@ import java.util.*
 class GameActivity : AppCompatActivity() {
     var currentQuestionNo = 0
     private val questions = Vector<Question>()
+
+    val wrongSound = MediaPlayer.create(this, )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,6 +90,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun wrongAnswer() {
+
         showWrongAnswerDialog()
     }
 

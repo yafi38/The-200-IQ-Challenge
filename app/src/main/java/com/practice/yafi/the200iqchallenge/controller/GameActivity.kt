@@ -8,25 +8,26 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.practice.yafi.the200iqchallenge.R
-import com.practice.yafi.the200iqchallenge.model.Question
+import com.practice.yafi.the200iqchallenge.model.Question2
 import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.android.synthetic.main.right_answer_dialog.*
 import java.util.*
 
 class GameActivity : AppCompatActivity() {
-    var currentQuestionNo = 0
-    private val questions = Vector<Question>()
-    var lives = 3
+    private var currentQuestionNo = 0
+    private val questions = Vector<Question2>()
+    private var lives = 3
+    lateinit var rightAnswerDialog: AlertDialog
+    lateinit var wrongAnswerDialog:AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-        questions.add(Question("LUL", arrayOf("a", "b", "c", "d"), 2, "Because i said so"))
-        /*applicationContext.assets.open("QuestionFile.txt").reader().forEachLine {
+
+        createDialogs()
+        applicationContext.assets.open("QuestionFile.txt").reader().forEachLine {
             val strings = it.split(";")
-            println(strings.size)
-            questions.add(Question(strings[0], arrayOf(strings[1], strings[2], strings[3], strings[4]), strings[5].toInt(), strings[6]))
-        }*/
+            questions.add(Question2(strings[0], arrayOf(strings[1], strings[2], strings[3], strings[4]), strings[5].toInt(), strings[6]))
+        }
         loadQuestion()
     }
 
@@ -86,7 +87,8 @@ class GameActivity : AppCompatActivity() {
             startActivity(endIntent)
             finish()
         } else {
-            explanationText.text = questions[currentQuestionNo-1].explanation
+            println("Current Explanation: ${questions[currentQuestionNo-1].explanation}")
+            //explanationText.text = questions[currentQuestionNo-1].explanation
             showRightAnswerDialog()
             loadQuestion()
         }
@@ -108,33 +110,35 @@ class GameActivity : AppCompatActivity() {
         showWrongAnswerDialog()
     }
 
+    private fun createDialogs() {
+        val rightAnsDialogBuilder = AlertDialog.Builder(this)
+        rightAnsDialogBuilder.setView(layoutInflater.inflate(R.layout.right_answer_dialog, null))
+        rightAnswerDialog = rightAnsDialogBuilder.create()
+
+        val wrongAnsDialogBuilder = AlertDialog.Builder(this)
+        wrongAnsDialogBuilder.setView(layoutInflater.inflate(R.layout.wrong_answer_dialog, null))
+        wrongAnswerDialog = wrongAnsDialogBuilder.create()
+    }
+
     private fun showRightAnswerDialog() {
-        val dialog = AlertDialog.Builder(this)
-        val dialogView = layoutInflater.inflate(R.layout.right_answer_dialog, null)
-        dialog.setView(dialogView)
-        val alert = dialog.create()
-        alert.show()
-        alert.setCancelable(false)
-        alert.setCanceledOnTouchOutside(false)
+        rightAnswerDialog.show()
+        rightAnswerDialog.setCancelable(false)
+        rightAnswerDialog.setCanceledOnTouchOutside(false)
 
         Handler().postDelayed({
-            if (alert.isShowing)
-                alert.dismiss()
+            if (rightAnswerDialog.isShowing)
+                rightAnswerDialog.dismiss()
         }, 1000)
     }
 
     private fun showWrongAnswerDialog() {
-        val dialog = AlertDialog.Builder(this)
-        val dialogView = layoutInflater.inflate(R.layout.wrong_answer_dialog, null)
-        dialog.setView(dialogView)
-        val alert = dialog.create()
-        alert.show()
-        alert.setCancelable(false)
-        alert.setCanceledOnTouchOutside(false)
+        wrongAnswerDialog.show()
+        wrongAnswerDialog.setCancelable(false)
+        wrongAnswerDialog.setCanceledOnTouchOutside(false)
 
         Handler().postDelayed({
-            if (alert.isShowing)
-                alert.dismiss()
+            if (wrongAnswerDialog.isShowing)
+                wrongAnswerDialog.dismiss()
         }, 1000)
     }
 

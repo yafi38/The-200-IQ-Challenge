@@ -10,6 +10,7 @@ import android.view.View
 import com.practice.yafi.the200iqchallenge.R
 import com.practice.yafi.the200iqchallenge.model.Question
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.right_answer_dialog.*
 import java.util.*
 
 class GameActivity : AppCompatActivity() {
@@ -17,15 +18,15 @@ class GameActivity : AppCompatActivity() {
     private val questions = Vector<Question>()
     var lives = 3
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
-
-        applicationContext.assets.open("QuestionFile.txt").reader().forEachLine {
+        questions.add(Question("LUL", arrayOf("a", "b", "c", "d"), 2, "Because i said so"))
+        /*applicationContext.assets.open("QuestionFile.txt").reader().forEachLine {
             val strings = it.split(";")
-            questions.add(Question(strings[0], arrayOf(strings[1], strings[2], strings[3], strings[4]), strings[5].toInt()))
-        }
+            println(strings.size)
+            questions.add(Question(strings[0], arrayOf(strings[1], strings[2], strings[3], strings[4]), strings[5].toInt(), strings[6]))
+        }*/
         loadQuestion()
     }
 
@@ -85,23 +86,23 @@ class GameActivity : AppCompatActivity() {
             startActivity(endIntent)
             finish()
         } else {
+            explanationText.text = questions[currentQuestionNo-1].explanation
             showRightAnswerDialog()
             loadQuestion()
         }
-
     }
 
     private fun wrongAnswer() {
         val wrongSound = MediaPlayer.create(this, R.raw.wrong_answer)
         lives--
-        if(lives == 2) {
-            heart1.visibility = View.INVISIBLE
-        } else if(lives == 1) {
-            heart2.visibility = View.INVISIBLE
-        } else {
-            wrongSound.start()
-            gameOver()
-            return
+        when (lives) {
+            2 -> heart1.visibility = View.INVISIBLE
+            1 -> heart2.visibility = View.INVISIBLE
+            else -> {
+                wrongSound.start()
+                gameOver()
+                return
+            }
         }
         wrongSound.start()
         showWrongAnswerDialog()
@@ -120,7 +121,6 @@ class GameActivity : AppCompatActivity() {
             if (alert.isShowing)
                 alert.dismiss()
         }, 1000)
-
     }
 
     private fun showWrongAnswerDialog() {

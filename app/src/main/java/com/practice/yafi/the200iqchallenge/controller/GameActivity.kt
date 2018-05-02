@@ -15,6 +15,7 @@ import java.util.*
 class GameActivity : AppCompatActivity() {
     var currentQuestionNo = 0
     private val questions = Vector<Question>()
+    var lives = 3
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,6 +93,16 @@ class GameActivity : AppCompatActivity() {
 
     private fun wrongAnswer() {
         val wrongSound = MediaPlayer.create(this, R.raw.wrong_answer)
+        lives--
+        if(lives == 2) {
+            heart1.visibility = View.INVISIBLE
+        } else if(lives == 1) {
+            heart2.visibility = View.INVISIBLE
+        } else {
+            wrongSound.start()
+            gameOver()
+            return
+        }
         wrongSound.start()
         showWrongAnswerDialog()
     }
@@ -125,6 +136,12 @@ class GameActivity : AppCompatActivity() {
             if (alert.isShowing)
                 alert.dismiss()
         }, 1000)
+    }
+
+    private fun gameOver() {
+        val gameOverIntent = Intent(this, GameOverActivity::class.java)
+        startActivity(gameOverIntent)
+        finish()
     }
 
     override fun onBackPressed() {

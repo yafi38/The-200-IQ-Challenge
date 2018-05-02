@@ -1,4 +1,4 @@
-package com.practice.yafi.the200iqchallenge.Controller
+package com.practice.yafi.the200iqchallenge.controller
 
 import android.content.Intent
 import android.media.MediaPlayer
@@ -7,8 +7,8 @@ import android.os.Handler
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import com.practice.yafi.the200iqchallenge.Model.Question
 import com.practice.yafi.the200iqchallenge.R
+import com.practice.yafi.the200iqchallenge.model.Question
 import kotlinx.android.synthetic.main.activity_game.*
 import java.util.*
 
@@ -102,6 +102,8 @@ class GameActivity : AppCompatActivity() {
         dialog.setView(dialogView)
         val alert = dialog.create()
         alert.show()
+        alert.setCancelable(false)
+        alert.setCanceledOnTouchOutside(false)
 
         Handler().postDelayed({
             if (alert.isShowing)
@@ -116,6 +118,8 @@ class GameActivity : AppCompatActivity() {
         dialog.setView(dialogView)
         val alert = dialog.create()
         alert.show()
+        alert.setCancelable(false)
+        alert.setCanceledOnTouchOutside(false)
 
         Handler().postDelayed({
             if (alert.isShowing)
@@ -126,5 +130,6 @@ class GameActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val menuIntent = Intent(this, MenuActivity::class.java)
         startActivity(menuIntent)
+        finish()
     }
 }

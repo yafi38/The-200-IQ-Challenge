@@ -1,4 +1,4 @@
-package com.practice.yafi.the200iqchallenge.Controller
+package com.practice.yafi.the200iqchallenge.controller
 
 import android.content.Intent
 import android.media.MediaPlayer

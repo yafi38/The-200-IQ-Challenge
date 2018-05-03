@@ -8,14 +8,14 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.practice.yafi.the200iqchallenge.R
-import com.practice.yafi.the200iqchallenge.model.Question2
+import com.practice.yafi.the200iqchallenge.model.Question
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.right_answer_dialog.*
 import java.util.*
 
 class GameActivity : AppCompatActivity() {
     private var currentQuestionNo = 0
-    private val questions = Vector<Question2>()
+    private val questions = Vector<Question>()
     private var lives = 3
     lateinit var rightAnswerDialog: AlertDialog
     lateinit var wrongAnswerDialog:AlertDialog
@@ -27,7 +27,7 @@ class GameActivity : AppCompatActivity() {
         createDialogs()
         applicationContext.assets.open("QuestionFile.txt").reader().forEachLine {
             val strings = it.split(";")
-            questions.add(Question2(strings[0], arrayOf(strings[1], strings[2], strings[3], strings[4]), strings[5].toInt(), strings[6]))
+            questions.add(Question(strings[0], arrayOf(strings[1], strings[2], strings[3], strings[4]), strings[5].toInt(), strings[6]))
         }
         loadQuestion()
     }
@@ -84,14 +84,6 @@ class GameActivity : AppCompatActivity() {
         rightSound.start()
         showRightAnswerDialog()
         currentQuestionNo++
-
-        if (currentQuestionNo == questions.size) {
-            val endIntent = Intent(this, EndActivity::class.java)
-            startActivity(endIntent)
-            finish()
-        } else {
-            loadQuestion()
-        }
     }
 
     private fun wrongAnswer() {
@@ -125,11 +117,6 @@ class GameActivity : AppCompatActivity() {
         rightAnswerDialog.explanationText.text = questions[currentQuestionNo].explanation
         rightAnswerDialog.setCancelable(false)
         rightAnswerDialog.setCanceledOnTouchOutside(false)
-
-        Handler().postDelayed({
-            if (rightAnswerDialog.isShowing)
-                rightAnswerDialog.dismiss()
-        }, 3000)
     }
 
     private fun showWrongAnswerDialog() {
@@ -141,6 +128,17 @@ class GameActivity : AppCompatActivity() {
             if (wrongAnswerDialog.isShowing)
                 wrongAnswerDialog.dismiss()
         }, 1000)
+    }
+
+    fun next(view: View) {
+        rightAnswerDialog.dismiss()
+        if (currentQuestionNo == questions.size) {
+            val endIntent = Intent(this, EndActivity::class.java)
+            startActivity(endIntent)
+            finish()
+        } else {
+            loadQuestion()
+        }
     }
 
     private fun gameOver() {

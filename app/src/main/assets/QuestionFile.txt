@@ -4,6 +4,6 @@
 4. What is 1+5?;Phone;Five;Six;Seven;1;1+5 is phone of the company named 1+
 5. What do you call a person who does not have all his fingers in one hand?;Half Fingered;Half Handed;Double Fingered;Normal;4;A normal person doesnot have all his 10 fingers in one hand
 6. What is the maximum number of times a single page of a paper can be folded in half by hand?;Once;Twice;21 Times;Infinite Times;1;Because then it will not be half anymore. It will be one-fourth and so on
-7. There are 10 black and 10 white balls in a box. How many balls would you need to pick up from that box randomly to make sure that you have at least a pair of same color?;3;4;11;12;1;Find out by yourself
+7. There are 10 black and 10 white balls in a box. How many balls would you need to pick up from that box randomly to make sure that you have at least two balls of same color?;3;4;11;12;1;Find out by yourself
 8. If you divide 20 by half and then add 10 what do you get?;20;30;40;50;4;You are dividing by half, not dividing by two
 9. At a party, everyone shook hands with everybody else. There were 28 handshakes. How many people were at the party?;7;8;10;14;2;If there are n persons in a party, there will be n(n-1)/2 handshakes

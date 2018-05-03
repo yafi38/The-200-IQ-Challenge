@@ -10,6 +10,7 @@ import android.view.View
 import com.practice.yafi.the200iqchallenge.R
 import com.practice.yafi.the200iqchallenge.model.Question2
 import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.right_answer_dialog.*
 import java.util.*
 
 class GameActivity : AppCompatActivity() {
@@ -81,15 +82,14 @@ class GameActivity : AppCompatActivity() {
     private fun rightAnswer() {
         val rightSound = MediaPlayer.create(this, R.raw.right_answer)
         rightSound.start()
+        showRightAnswerDialog()
         currentQuestionNo++
+
         if (currentQuestionNo == questions.size) {
             val endIntent = Intent(this, EndActivity::class.java)
             startActivity(endIntent)
             finish()
         } else {
-            println("Current Explanation: ${questions[currentQuestionNo-1].explanation}")
-            //explanationText.text = questions[currentQuestionNo-1].explanation
-            showRightAnswerDialog()
             loadQuestion()
         }
     }
@@ -122,13 +122,14 @@ class GameActivity : AppCompatActivity() {
 
     private fun showRightAnswerDialog() {
         rightAnswerDialog.show()
+        rightAnswerDialog.explanationText.text = questions[currentQuestionNo].explanation
         rightAnswerDialog.setCancelable(false)
         rightAnswerDialog.setCanceledOnTouchOutside(false)
 
         Handler().postDelayed({
             if (rightAnswerDialog.isShowing)
                 rightAnswerDialog.dismiss()
-        }, 1000)
+        }, 3000)
     }
 
     private fun showWrongAnswerDialog() {
